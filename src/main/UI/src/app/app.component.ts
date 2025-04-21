@@ -28,6 +28,8 @@ export class AppComponent implements OnInit{
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
 
+  messages: string[] = [];
+
     ngOnInit(){
       this.roomsearch= new FormGroup({
         checkin: new FormControl(' '),
@@ -44,6 +46,12 @@ export class AppComponent implements OnInit{
       this.currentCheckInVal = x.checkin;
       this.currentCheckOutVal = x.checkout;
     });
+
+    this.httpClient.get<string[]>('http://localhost:8080/messages')
+      .subscribe(data => {
+        this.messages = data;
+        console.log("Messages received:", this.messages);
+      });
   }
 
     onSubmit({value,valid}:{value:Roomsearch,valid:boolean}){
