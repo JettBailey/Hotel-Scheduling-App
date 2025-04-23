@@ -14,6 +14,7 @@ import {map} from "rxjs/operators";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  public presentationTimes: string[] = [];
 
   constructor(private httpClient:HttpClient){}
 
@@ -51,6 +52,12 @@ export class AppComponent implements OnInit{
       .subscribe(data => {
         this.messages = data;
         console.log("Messages received:", this.messages);
+      });
+
+    this.httpClient.get<string[]>('http://localhost:8080/presentation-time')
+      .subscribe(data => {
+        this.presentationTimes = data;
+        console.log('Presentation times received:', data)
       });
   }
 

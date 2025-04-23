@@ -41,6 +41,14 @@
             <img src="assets/images/intro_attractions.jpg" alt="Intro Gallery Attractions Sample Pictures">
             <img class="hidesm" src="assets/images/intro_wedding.jpg" alt="Intro Gallery Dining Sample Pictures">
           </div>
+          <div *ngIf="presentationTimes.length > 0">
+            <h2>Live Presentation Times</h2>
+            <ul>
+              <li *ngFor="let time of presentationTimes">
+                {{time}}
+              </li>
+            </ul>
+          </div>
           <h1>Book a Room</h1>
           <form class="form-horizontal" [formGroup]="roomsearch"
           (ngSubmit)="onSubmit(roomsearch)">
